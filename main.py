@@ -51,3 +51,18 @@ def get_positive_float(prompt):
                             homework = Homework(title, subject, date, max_score, score)
                             tracker.add_assignment(homework)
                             print(f" Added : {homework}")
+
+
+                            #this will asks the user for exam details and adds it to the tracker also.
+                            def add_exam(tracker):
+                                print("\n--- Add Exam ---")
+                                title = get_non_empty_input("Enter the title: ")
+                                subject = get_non_empty_input("Enter the subject: ")
+                                date = get_non_empty_input("Enter the date (YYYY-MM-DD): ")
+                                max_score = get_positive_float("Enter the maximum score: ")
+                                score = get_score_input(f"Enter score achieved (0-{max_score}): ", max_score)
+                                exam_type = get_non_empty_input("Enter exam type (Midterm/Final/Quiz): ")
+
+                                exam = Exam(title, subject, date, max_score, score, exam_type=exam_type)
+                                tracker.add_assignment(exam)
+                                print(f" Added : {exam}")
