@@ -25,8 +25,8 @@ def get_positive_float(prompt):
             print(" ! Please enter a valid number. Try agin.")
 
 
-            #it will repeatedly asks for a score between 0 and max_score (inclusive)
-            def get_score_input(prompt, max_score) :
+#it will repeatedly asks for a score between 0 and max_score (inclusive)
+def get_score_input(prompt, max_score) :
                 while True:
                     raw_value = input(prompt).strip()
                     try:
@@ -39,8 +39,8 @@ def get_positive_float(prompt):
                         print(" ! Please dear enter a valid number. Try again.")
 
 
-                        #this function below will ask the user for homework details and add it to the tracker.
-                        def add_homework(tracker):
+#this function below will ask the user for homework details and add it to the tracker.
+def add_homework(tracker):
                             print("\n--- Add Homework ---")
                             title = get_non_empty_input("Enter the title: ")
                             subject = get_non_empty_input("Enter the subject: ")
@@ -53,8 +53,8 @@ def get_positive_float(prompt):
                             print(f" Added : {homework}")
 
 
-                            #this will asks the user for exam details and adds it to the tracker also.
-                            def add_exam(tracker):
+#this will asks the user for exam details and adds it to the tracker also.
+def add_exam(tracker):
                                 print("\n--- Add Exam ---")
                                 title = get_non_empty_input("Enter the title: ")
                                 subject = get_non_empty_input("Enter the subject: ")
@@ -68,8 +68,8 @@ def get_positive_float(prompt):
                                 print(f" Added : {exam}")
 
 
-                                #Prints every assignments currently stored, numbered.
-                                def list_assignments(tracker, assignments=None):
+#Prints every assignments currently stored, numbered.
+def list_assignments(tracker, assignments=None):
                                     items = assignments if assignments is not None else tracker.list_all()
                                     print()
                                     if not items:
@@ -78,8 +78,8 @@ def get_positive_float(prompt):
                                     for i, a in enumerate(items, start=1):
                                         print(f" {i}. {a}")
 
-                                        #This is a sub-menu that lets the user filter by subject or by type, then shows results.
-                                        def filter_menu(tracker):
+#This is a sub-menu that lets the user filter by subject or by type, then shows results.
+def filter_menu(tracker):
                                             while True:
                                                 print("\n--- Filter Assignments ---")
                                                 print(" 1. Filter by Subject")
@@ -100,8 +100,8 @@ def get_positive_float(prompt):
 
                                                 list_assignments(tracker, results)
 
-                                                #This will prints overall statistics: counts, average, highest and lowest scoring assignment.
-                                                def show_summary(tracker):
+#This will prints overall statistics: counts, average, highest and lowest scoring assignment.
+def show_summary(tracker):
                                                     print("\n--- Grade Summary ---")
                                                     all_items = tracker.list_all()
                                                     if not all_items:
@@ -122,6 +122,58 @@ def get_positive_float(prompt):
                                                     bottom = tracker.lowest()
                                                     if bottom is not None:
                                                         print(f" Lowest scoring assignment: {bottom}")
+
+MENU_TEXT = """
+========================================
+   Student Grade/Assignment Tracker
+========================================
+  1. Add Homework
+  2. Add Exam
+  3. List All Assignments
+  4. Filter Assignments
+  5. Show Grade Summary
+  6. Exit
+========================================
+"""
+#This below will rum the menu loop until the user choose to exit.
+def main():
+    tracker = GradeTracker()
+    print("Welcome to the Student Grade/Assignment Tracker!")
+
+
+    while True:
+        print(MENU_TEXT)
+        choice = input("Choose an option (1-6): ").strip()
+
+        if choice == "1":
+            add_homework(tracker)
+        elif choice == "2":
+            add_exam(tracker)
+        elif choice == "3":
+            list_assignments(tracker)
+        elif choice == "4":
+            filter_menu(tracker)
+        elif choice == "5":
+            show_summary(tracker)
+        elif choice == "6":
+            print("Thanks for using the Grade Tracker.Goodbye!")
+            break
+        else:
+            print(" ! Invalid option. Please choose a number between 1-6.")
+
+
+
+if __name__ == "__main__":
+    main()
+
+
+                                                        
+
+
+                                                        
+
+
+
                                                             
                                                 
 
