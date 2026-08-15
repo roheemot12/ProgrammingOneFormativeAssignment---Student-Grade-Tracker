@@ -1,3 +1,4 @@
+
 class Assignment:
     def __init__(self, title, subject, date, max_score, score=None):
         self.title = title
@@ -20,8 +21,14 @@ class Assignment:
         return f"{self.title} ({self.subject}) - {self.score}/{self.max_score} ({percentage:.1f}%)"
 
 
+class Homework(Assignment):
+        def __init__(self, title, subject, date, max_score, score=None):
+           super().__init__(title, subject, date, max_score, score)
 
-if __name__ == "__main__":
-        test_assignment = Assignment("English HW 1 ", "English", "2026-09-15", 20)
-        test_assignment.record_score(15)
-        print(test_assignment) 
+
+class Exam(Assignment):
+    def __init__(self, title, subject, date, max_score, score=None, exam_type="Midterm"):
+        super().__init__(title, subject, date, max_score, score)
+        self.exam_type = exam_type
+
+
